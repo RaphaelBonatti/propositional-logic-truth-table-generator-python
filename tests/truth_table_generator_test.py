@@ -1,45 +1,30 @@
-from modules import truth_table_generator, parser
+from modules import parser, truth_table_generator
+from modules.truth_table_visualizer import TruthTableVisualizer
 
 
 def test_and():
     wff = parser.wff_from_str("(A & B)")
-    variable_combinations, subformulas, rows = truth_table_generator.build_table(wff)
+    truth_table = truth_table_generator.build_table(wff)
 
     # Act
-    output = truth_table_generator.table_to_strings(
-        variable_combinations, subformulas, rows
-    )
+    output = TruthTableVisualizer(truth_table, as_int=True).to_str()
 
     # assert
-    with open("tests/truth_table_and.txt") as file:
-        expected_output = file.readlines()
+    with open("tests/test_outputs/truth_table_and.txt") as file:
+        expected_output = file.read()
 
     assert output == expected_output
 
 
 def test_not_and():
     wff = parser.wff_from_str("~(A & B)")
-    variable_combinations, subformulas, rows = truth_table_generator.build_table(wff)
+    truth_table = truth_table_generator.build_table(wff)
 
     # Act
-    output = truth_table_generator.table_to_strings(
-        variable_combinations, subformulas, rows
-    )
+    output = TruthTableVisualizer(truth_table, as_int=True).to_str()
 
     # assert
-    with open("tests/truth_table_not_and.txt") as file:
-        expected_output = file.readlines()
+    with open("tests/test_outputs/truth_table_not_and.txt") as file:
+        expected_output = file.read()
 
-    for row_a, row_b in zip(output, expected_output):
-        assert row_a == row_b
-
-
-print(
-    "".join(
-        truth_table_generator.table_to_strings(
-            *truth_table_generator.build_table(
-                parser.wff_from_str("(((~(A=>B)&C)|D)<=>E)")
-            )
-        )
-    )
-)
+    assert output == expected_output

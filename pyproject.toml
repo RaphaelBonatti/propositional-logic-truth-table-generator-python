@@ -9,6 +9,7 @@ packages = [{include = "modules", from="src"}]
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
 textx = "^4.0.1"
+prettytable = "^3.10.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.2.2"
