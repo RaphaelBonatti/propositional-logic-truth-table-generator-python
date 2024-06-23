@@ -15,6 +15,9 @@ prettytable = "^3.10.0"
 [tool.poetry.group.test.dependencies]
 pytest = "^8.2.2"
 
+[tool.poetry.scripts]
+pltt-cli = "propositional_logic_truth_table_generator.scripts.cli:entrypoint"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
