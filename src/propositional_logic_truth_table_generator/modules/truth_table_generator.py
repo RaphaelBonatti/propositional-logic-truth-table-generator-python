@@ -72,8 +72,12 @@ def build_subformulas(traversal_list: List[WFF]) -> List[str]:
 
 
 def find_variables(traversal_list: List[WFF]) -> List[str]:
-    # we take the set of variables found in the traversal, because we can visit repeated variables
-    return set([wff.id for wff in traversal_list if not match_connective(wff)])
+    variables = []
+    for wff in traversal_list:
+        if (not match_connective(wff)) and (wff.id not in variables):
+            variables.append(wff.id)
+
+    return variables
 
 
 def match_connective(wff: WFF) -> bool:
