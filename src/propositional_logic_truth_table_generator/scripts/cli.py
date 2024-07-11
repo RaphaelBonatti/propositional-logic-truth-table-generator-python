@@ -29,7 +29,7 @@ def entrypoint():
     truth_table = truth_table_generator.build_table(wff)
     truth_table_visualizer = TruthTableVisualizer(truth_table, as_int=True)
     if args.print:
-        print(truth_table_visualizer.to_str())
+        print(truth_table_visualizer)
     if args.generate:
         filename = args.generate
         truth_table_visualizer.save_as_html(args.generate + ".html")
