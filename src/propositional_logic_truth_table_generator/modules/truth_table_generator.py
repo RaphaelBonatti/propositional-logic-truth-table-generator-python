@@ -9,7 +9,7 @@ from modules.wff_traverser import build_traversal_post_order
 
 
 type Row = List[TruthValue]
-type Valuation = Dict[Formula, TruthValue]
+type Valuation = Dict[Variable, TruthValue]
 type Evaluation = OrderedDict[Formula, TruthValue]
 
 
@@ -41,7 +41,7 @@ def build_table(wff: WFF) -> TruthTable:
 
 
 def generate_valuations(variables: List[Variable]) -> List[Valuation]:
-    cartesian_product = itertools.product(*(len(variables) * [[False, True]]))
+    cartesian_product = itertools.product([False, True], repeat=len(variables))
     return [dict(zip(variables, values)) for values in cartesian_product]
 
 
@@ -57,7 +57,9 @@ def is_connective(wff: WFF) -> bool:
     return wff.__class__.__name__ != Atom.__name__
 
 
-def evaluate_subformulas(traversal: List[WFF], valuation: Valuation) -> Evaluation:
+def evaluate_subformulas(
+    traversal: List[WFF], valuation: Valuation
+) -> Evaluation:
     stack: List[TruthValue] = []
     evaluation: Evaluation = OrderedDict()
     for wff in traversal:
