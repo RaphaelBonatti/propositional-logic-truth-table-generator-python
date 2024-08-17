@@ -23,7 +23,38 @@ Note: This project was tested using Python 3.12.4 on Ubuntu.
 
 ## Usage
 
-TBD
+To use the propositional logic truth table generator, activate the project environment and execute the `pltt-cli` command with the formula you want to parse as a command-line argument.
+You can use the flags `-p` or `--print` to print the truth table and the argument `-g` or `--generate` followed by a filename to generate the corresponding HTML file. 
+
+You can use the following logical connectives: `~` (negation), `&` (conjunction), `|` (disjunction), `=>` (implication) and `<=>`(equivalence). However, you must ensure that every formula that includes a binary connective (&, |, =>, or <=>) is surrounded by parentheses.
+
+Here is an example of using the CLI:
+```shell
+$ pltt-cli -p -g "example" "((~A&B)|C)"
+```
+The output will be:
+```
++--------------------------------------------+
+|    Truth table for wff: ((¬A ∧ B) ∨ C)     |
++---+---+---+----+----------+----------------+
+| A | B | C | ¬A | (¬A ∧ B) | ((¬A ∧ B) ∨ C) |
++---+---+---+----+----------+----------------+
+| 0 | 0 | 0 | 1  |    0     |       0        |
+| 0 | 0 | 1 | 1  |    0     |       1        |
+| 0 | 1 | 0 | 1  |    1     |       1        |
+| 0 | 1 | 1 | 1  |    1     |       1        |
+| 1 | 0 | 0 | 0  |    0     |       0        |
+| 1 | 0 | 1 | 0  |    0     |       1        |
+| 1 | 1 | 0 | 0  |    0     |       0        |
+| 1 | 1 | 1 | 0  |    0     |       1        |
++---+---+---+----+----------+----------------+
+The truth table example.html has been generated.
+```
+
+An HTML file named "example.html" containing a truth table will be created in the current directory. The resulting table will look as follows.
+
+![The truth table example](images/example.png)
+
 
 ## License
 This project is licensed under the Apache 2.0 license.
