@@ -63,7 +63,7 @@ def evaluate_subformulas(
     stack: List[TruthValue] = []
     evaluation: Evaluation = OrderedDict()
     for wff in traversal:
-        params: List[WFF] = [stack.pop() for _ in signature(wff.evaluate).parameters]  # type: ignore
+        params: List[WFF] = reversed([stack.pop() for _ in signature(wff.evaluate).parameters])  # type: ignore
         value: TruthValue = wff.evaluate(*params)  # type: ignore
         if value != None:
             stack.append(value)  # type: ignore

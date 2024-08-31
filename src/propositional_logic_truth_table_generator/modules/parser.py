@@ -3,9 +3,9 @@ from typing import Any
 
 from textx import metamodel_from_str  # type: ignore
 
-type TruthValue = bool
-type Variable = str
 type Formula = str
+type Variable = str
+type TruthValue = bool
 
 grammar = """
 Model: wff=WFF;
@@ -46,7 +46,7 @@ class Implication(WFF):
         self.formula = f"({str(self.lhs)} → {str(self.rhs)})"
 
     @staticmethod
-    def evaluate(rhs: TruthValue, lhs: TruthValue) -> TruthValue:
+    def evaluate(lhs: TruthValue, rhs: TruthValue) -> TruthValue:
         return (not lhs) or rhs
 
 
